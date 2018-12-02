@@ -1,0 +1,133 @@
+body{
+    height: 100%;
+}
+
+.landing{
+    margin: 40px 0 40px 0;
+}
+
+.signup{
+    border-radius: .3rem;
+    background-color: #003399;
+    color: #ffffff;
+}
+
+.parent {
+    height: 100%;
+    background-color: #ffffff;
+    padding-bottom: 40px;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.site-header {
+    background-color: #003399;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+.site-header a {
+    color: #ffffff;
+    transition: ease-in-out color .15s;
+}
+.site-header a:hover {
+    text-decoration: underline;
+}
+.brand-name {
+    font-size: 25px;
+    color: #ffffff;
+    font-family: 'Lalezar', cursive;
+}
+
+.categories {
+    margin: 15px;
+}
+
+.btn-position {
+    margin: 3px;
+    font-size: 12px;
+}
+
+.currentgoals {
+    margin: 15px 15px 0 15px;
+}
+
+.currentgoals h3 {
+    border-bottom: 2px solid #003399;;
+}
+
+.currentgoals h6 {
+    background-color: #003399 ;
+    color: #ffffff;
+    padding: 5px;
+}
+.goalBox{
+    padding: 5px;
+    border: 1px solid #E8E8E8;
+    border-top: none;
+    box-shadow: 1px 1px #E0E0E0;
+}
+
+.headings{
+    margin: 5px 0 5px 0;
+    text-align: left;
+    background-color: #D8D8D8;
+}
+
+.items{
+    margin: 5px 0 5px 0;
+    text-align: left;
+}
+
+.hover:hover{
+    background-color: #007bff;
+    color: #ffffff;
+    border-radius: 2px;
+}
+
+.list span {
+    font-size: 12px;
+
+}
+
+.bg-color{
+    background-color: #e9ecef;
+}
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+footer p {
+    margin-bottom: .25rem;
+}

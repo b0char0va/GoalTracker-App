@@ -1,0 +1,42 @@
+{
+  "name": "goaltrackerapp",
+  "version": "1.0.0",
+  "description": "An app which keeps tracks of user's life, yearly, quaterly, monthly, and daily goals",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "dev": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b0char0va/GoalTracker-App.git"
+  },
+  "author": "Mona Bocharova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/b0char0va/GoalTracker-App/issues"
+  },
+  "homepage": "https://github.com/b0char0va/GoalTracker-App#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "body-parser": "^1.18.3",
+    "mysql": "^2.16.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.1",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.23.0",
+    "webpack-cli": "^3.1.2"
+  }
+}

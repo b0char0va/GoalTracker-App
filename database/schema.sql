@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS goaltracker;
+
+USE goaltracker
+
+CREATE TABLE IF NOT EXISTS users(
+    id INT NOT NULL AUTO_INCREMENT,
+    firstname VARCHAR(40) NOT NULL,
+    lastname VARCHAR(40) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS goals(
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    status INT(3) NOT NULL,
+    category CHAR(100) NOT NULL,
+    userId INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userId) REFERENCES users(id)
+)
+
