@@ -9,9 +9,9 @@ const GoalList = props => (
             <div className="col-md-6">Progress %</div>
         </div>
         {
-            props.list.map((el)=>{
+            props.list.map((el, i)=>{
                 return(
-                    <Goal goal={el}/>
+                    <Goal goal={el} onEdit={props.onEdit} edit={props.edit} key={i} id={i} onChange={props.onChange} onClick={props.saveGoal}/>
                 )
             })
         }

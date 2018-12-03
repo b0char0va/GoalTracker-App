@@ -49,3 +49,15 @@ app.post('/users/:id/goal', (req, res) => {
         }
     });
 });
+
+app.patch('/users/:id/goal', (req, res) => {
+    const data = req.body;
+    db.editGoal(data, (err, data) => {
+        if (err) {
+            res.end(err);
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(data));
+        }
+    });
+});

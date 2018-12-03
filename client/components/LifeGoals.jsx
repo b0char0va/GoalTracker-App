@@ -15,7 +15,7 @@ const LifeGoals = props => (
             </div>
             <div>
                 {
-                    props.goalList.length > 0 ? <GoalList list={props.goalList}/> : null
+                    props.goalList.length > 0 ? <GoalList list={props.goalList} onEdit={props.onEdit} edit={props.edit} onChange={props.editHandle} saveGoal={props.saveGoal}/> : null
                 }
             </div>
         </div>

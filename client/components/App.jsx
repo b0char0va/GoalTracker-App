@@ -37,6 +37,11 @@ class App extends React.Component {
                 category: ''
             },
             allGoals: [],
+            edit: {
+                status: false,
+                toEdit: 0,
+                input: '',
+            },
         };
         this.handleOnChangeSignup = this.handleOnChangeSignup.bind(this);
         this.handleOnChangeSignin = this.handleOnChangeSignin.bind(this);
@@ -45,6 +50,9 @@ class App extends React.Component {
         this.addCategory = this.addCategory.bind(this);
         this.handleChangeGoal = this.handleChangeGoal.bind(this);
         this.addGoal = this.addGoal.bind(this);
+        this.editGoal = this.editGoal.bind(this);
+        this.handleGoalEdit = this.handleGoalEdit.bind(this);
+        this.saveEditedGoal = this.saveEditedGoal.bind(this);
     }
 
     handleOnChangeSignup(e) {
@@ -101,7 +109,8 @@ class App extends React.Component {
                         id: data[0].userId,
                         allGoals: data,
                         currentGoals: currentGoals,
-                        anyGoals: true
+                        anyGoals: true,
+                        signinDetails: {},
                     })
                 }
             })
@@ -120,7 +129,7 @@ class App extends React.Component {
                 body: JSON.stringify(this.state.signupDetails)
             })
             .then(res =>  res.json() )
-            .then(data => console.log( JSON.stringify( data )))
+            .then(data => console.log(data))
             .catch(err => console.log(err))
     }
 
@@ -164,12 +173,62 @@ class App extends React.Component {
             .then(res =>  res.json() )
             .then(data => {
                 const goals = this.state.allGoals;
-                console.log(goals);
                 goals.push(data[0]);
                 this.setState({
                     allGoals: goals,
                 }, () => {
                     console.log(this.state.allGoals)
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
+    handleGoalEdit(e){
+        let editState = Object.assign({}, this.state.edit);
+        editState.input = e.target.value;
+        this.setState({
+            edit: editState
+        }, ()=> console.log(this.state.edit))
+    }
+
+    editGoal(e){
+        let editState = Object.assign({}, this.state.edit);
+        editState.toEdit = e.target.id;
+        editState.status = true;
+        this.setState({
+            edit: editState
+        }, ()=> console.log(this.state.edit))
+    }
+
+    saveEditedGoal(){
+        fetch(`/users/:${this.state.edit.toEdit}/goal`,
+            {
+                method: "PATCH",
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state.edit)
+            })
+            .then(res =>  res.json())
+            .then(data => {
+                const goals = [...this.state.allGoals];
+                goals.map((el, i) =>{
+                   if(el.id == this.state.edit.toEdit){
+                       if(data[0].title === ''){
+                           console.log('i am empty');
+                           goals.splice(i, 1);
+                       }else{
+                           goals.splice(i, 1, data[0]);
+                       }
+                   }
+                });
+                let editState = Object.assign({}, this.state.edit);
+                editState.toEdit = 0;
+                editState.status = false;
+                this.setState({
+                    allGoals: goals,
+                    edit: editState
                 })
             })
             .catch(err => console.log(err))
@@ -191,7 +250,7 @@ class App extends React.Component {
                             {
                                 !this.state.currentGoals.life ? null :
                                     <LifeGoals goalList={this.state.allGoals} onChange={this.handleChangeGoal}
-                                           onClick={this.addGoal}/>
+                                           onClick={this.addGoal} edit={this.state.edit} onEdit={this.editGoal} editHandle={this.handleGoalEdit} saveGoal={this.saveEditedGoal}/>
                             }
                             {
                                 !this.state.currentGoals.yearly ? null :

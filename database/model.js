@@ -59,8 +59,38 @@ const saveGoal = (data, callback) => {
     });
 };
 
+const editGoal = (data, callback) => {
+    if (data['input'] === '') {
+        const sql = `DELETE FROM goals WHERE id = ${data.toEdit}`;
+        db.query(sql, (err, res) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, [{id: 0, title: "", status: 0, category: "", userId: 0}]);
+            }
+        });
+    } else {
+        const sql = `UPDATE goals SET title = '${data.input}' WHERE id = ${data.toEdit}`;
+        db.query(sql, (err, res) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                const sqlStr = `SELECT * FROM goals WHERE id = ${data.toEdit}`;
+                db.query(sqlStr, (err, res) => {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        callback(null, res);
+                    }
+                });
+            }
+        });
+    }
+};
+
 module.exports = {
     save,
     exists,
-    saveGoal
+    saveGoal,
+    editGoal
 };
