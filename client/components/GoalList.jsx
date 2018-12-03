@@ -3,7 +3,7 @@ import Goal from './Goal.jsx';
 
 const GoalList = props => (
     <div className="list">
-        <span>Hover on goal title or progress to edit</span>
+        <span>Click on goal title or progress to edit or delete</span>
         <div className="row headings">
             <div className="col-md-6">Title</div>
             <div className="col-md-6">Progress %</div>

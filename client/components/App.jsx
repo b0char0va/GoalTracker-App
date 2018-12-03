@@ -41,6 +41,7 @@ class App extends React.Component {
                 status: false,
                 toEdit: 0,
                 input: '',
+                progressStatus: 0
             },
         };
         this.handleOnChangeSignup = this.handleOnChangeSignup.bind(this);
@@ -174,10 +175,12 @@ class App extends React.Component {
             .then(data => {
                 const goals = this.state.allGoals;
                 goals.push(data[0]);
+                const goalState = Object.assign({}, this.state.goals);
+                goalState.title = '';
+                goalState.category= '';
                 this.setState({
                     allGoals: goals,
-                }, () => {
-                    console.log(this.state.allGoals)
+                    goals : goalState
                 })
             })
             .catch(err => console.log(err))
@@ -185,7 +188,11 @@ class App extends React.Component {
 
     handleGoalEdit(e){
         let editState = Object.assign({}, this.state.edit);
-        editState.input = e.target.value;
+        if(e.target.name === 'title') {
+            editState.input = e.target.value;
+        } else if(e.target.name === 'progress') {
+            editState.progressStatus = e.target.value;
+        }
         this.setState({
             edit: editState
         }, ()=> console.log(this.state.edit))
@@ -195,6 +202,13 @@ class App extends React.Component {
         let editState = Object.assign({}, this.state.edit);
         editState.toEdit = e.target.id;
         editState.status = true;
+        let goals = [...this.state.allGoals];
+        goals.map((el) => {
+            if(el.id == e.target.id){
+                editState.input = el.title;
+                editState.progressStatus = el.status;
+            }
+        });
         this.setState({
             edit: editState
         }, ()=> console.log(this.state.edit))
@@ -216,7 +230,6 @@ class App extends React.Component {
                 goals.map((el, i) =>{
                    if(el.id == this.state.edit.toEdit){
                        if(data[0].title === ''){
-                           console.log('i am empty');
                            goals.splice(i, 1);
                        }else{
                            goals.splice(i, 1, data[0]);
@@ -251,30 +264,6 @@ class App extends React.Component {
                                 !this.state.currentGoals.life ? null :
                                     <LifeGoals goalList={this.state.allGoals} onChange={this.handleChangeGoal}
                                            onClick={this.addGoal} edit={this.state.edit} onEdit={this.editGoal} editHandle={this.handleGoalEdit} saveGoal={this.saveEditedGoal}/>
-                            }
-                            {
-                                !this.state.currentGoals.yearly ? null :
-                                    <YearlyGoals goalList={this.state.allGoals} onChange={this.handleChangeGoal} onClick={this.addGoal}/>
-                            }
-                            {
-                                !this.state.currentGoals.quaterly ? null :
-                                    <QuaterlyGoals goalList={this.state.allGoals} onChange={this.handleChangeGoal}
-                                           onClick={this.addGoal}/>
-                            }
-                            {
-                                !this.state.currentGoals.monthly ? null :
-                                    <MonthlyGoals goalList={this.state.allGoals} onChange={this.handleChangeGoal}
-                                           onClick={this.addGoal}/>
-                            }
-                            {
-                                !this.state.currentGoals.weekly ? null :
-                                    <WeeklyGoals goalList={this.state.allGoals} onChange={this.handleChangeGoal}
-                                           onClick={this.addGoal}/>
-                            }
-                            {
-                                !this.state.currentGoals.daily ? null :
-                                    <DailyGoals goalList={this.state.allGoals} onChange={this.handleChangeGoal}
-                                           onClick={this.addGoal}/>
                             }
                         </div>
                 }

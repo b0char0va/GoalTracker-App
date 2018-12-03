@@ -70,7 +70,7 @@ const editGoal = (data, callback) => {
             }
         });
     } else {
-        const sql = `UPDATE goals SET title = '${data.input}' WHERE id = ${data.toEdit}`;
+        const sql = `UPDATE goals SET title = '${data.input}', status = '${data.progressStatus}' WHERE id = ${data.toEdit}`;
         db.query(sql, (err, res) => {
             if (err) {
                 callback(err, null);
