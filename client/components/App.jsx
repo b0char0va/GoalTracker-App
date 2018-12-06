@@ -24,11 +24,6 @@ class App extends React.Component {
             },
             currentGoals: {
                 life: false,
-                yearly: false,
-                quaterly: false,
-                monthly: false,
-                weekly: false,
-                daily: false
             },
             anyGoals: false,
             goals: {
@@ -92,16 +87,6 @@ class App extends React.Component {
                 } else {
                     data.map((el) => {
                         if (el.category === 'life') {
-                            currentGoals.life = true;
-                        } else if (el.category === 'yearly') {
-                            currentGoals.life = true;
-                        } else if (el.category === 'quaterly') {
-                            currentGoals.life = true;
-                        } else if (el.category === 'monthly') {
-                            currentGoals.life = true;
-                        } else if (el.category === 'weekly') {
-                            currentGoals.life = true;
-                        } else if (el.category === 'daily') {
                             currentGoals.life = true;
                         }
                     });
